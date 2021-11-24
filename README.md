@@ -163,3 +163,4 @@ AT+SBDIX\r
 - https://usermanual.wiki/Iridium-Satellite/9603N.Developers-guide/html
 - https://www.datawell.nl/Portals/0/Documents/Brochures/datawell_brochure_iridium_sbd_b-40-03.pdf
 - https://docs.rockblock.rock7.com/docs/getting-started
+- https://www.youtube.com/watch?v=NOJ_VtSikAA
