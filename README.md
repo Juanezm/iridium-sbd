@@ -156,7 +156,99 @@ AT+SBDIX\r
 ```
 
 
+## CLI tool
 
+This repo contains the source code for a CLI that interacts with the Iridium SDB Rockboards (both 9602 and 9603 versions).
+
+### Installation
+
+It is always recommended the creation of a python virtual environment.
+
+``` bash
+python3 -m venv venv
+```
+
+``` bash
+source venv/bin/activate
+```
+
+``` bash
+pip install -e src
+```
+
+### Usage
+
+``` bash
+(venv) pi@raspberrypi:~ $ iridium-sbd
+Usage: iridium-sbd [OPTIONS] COMMAND [ARGS]...
+
+Options:
+  --serial_device TEXT  Serial device path.
+  --help                Show this message and exit.
+
+Commands:
+  send
+  signal
+```
+
+At the moment, two operations are supported only:
+
+- Showing signal bar
+
+```bash
+(venv) pi@raspberrypi:~ $ iridium-sbd signal
+
+Status                  | (0, 68, 0, -1, 0, 0)
+Model                   | IRIDIUM 9600 Family SBD Transceiver
+Call Processor Version  | TA13001        
+Modem DSP Version       | 1.7 svn        
+CpeM DSP Version        | 1.2 svn        
+CpeA DSP Version        | 1.2 svn        
+DBB Version             | 0x0001 (ASIC)  
+RFA Version             | 0x0004 (2A)    
+NVM Version             | KVS            
+Hardware Version        | BOOT07d2/9602revG/04/RAW04
+BOOT Version            | TA13001 (rev 3525)
+Serial Number           | 300234063233380
+Geolocation             | (4056, 228, 4896) 2021-11-26T13:30:52Z
+System time             | 2021-11-26T15:42:56Z
+
+Press CTR+C to exit
+
+Signal  [##############                      ]  2/5
+```
+
+- Sending a text message
+
+
+```bash
+(venv) pi@raspberrypi:~ $ iridium-sbd send --message "Hello from space!"
+Status                  | (0, 68, 0, -1, 0, 0)
+Model                   | IRIDIUM 9600 Family SBD Transceiver
+Call Processor Version  | TA13001
+Modem DSP Version       | 1.7 svn
+CpeM DSP Version        | 1.2 svn
+CpeA DSP Version        | 1.2 svn
+DBB Version             | 0x0001 (ASIC)
+RFA Version             | 0x0004 (2A)
+NVM Version             | KVS
+Hardware Version        | BOOT07d2/9602revG/04/RAW04
+BOOT Version            | TA13001 (rev 3525)
+Serial Number           | 300234063233380
+Geolocation             | (4056, 228, 4896) 2021-11-26T13:30:52Z
+System time             | 2021-11-26T15:52:17Z
+Talking to satellite...
+0 (32, 68, 2, 0, 0, 0)
+1 (32, 68, 2, 0, 0, 0)
+2 (32, 68, 2, 0, 0, 0)
+3 (32, 68, 2, 0, 0, 0)
+4 (32, 68, 2, 0, 0, 0)
+5 (0, 67, 0, 0, 0, 0)
+
+DONE.
+```
+
+ 
 ## References
 
 - https://usermanual.wiki/Iridium-Satellite/9603N.Iridium-9602-9602N-SBD-Transceiver-Developers-Guide-V1-2--DRAFT2/html
