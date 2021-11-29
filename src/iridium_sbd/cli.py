@@ -27,6 +27,19 @@ def print_device_info():
         print("{:<23} | {:<15}".format(k, str(v)))
 
 
+def sbd_transfer(rb:RockBlock):
+    # try a satellite Short Burst Data transfer
+    print("Talking to satellite...")
+    status = rb.satellite_transfer()
+    # loop as needed
+    retry = 0
+    while status[0] > 8:
+        time.sleep(10)
+        status = rb.satellite_transfer()
+        print(retry, status)
+        retry += 1
+
+
 @click.group()
 @click.option('--serial_device', default="/dev/ttyUSB0", help='Serial device path.')
 @click.pass_context
@@ -54,18 +67,24 @@ def send(ctx, message):
         # set the text
         rb.text_out = message
 
-        # try a satellite Short Burst Data transfer
-        print("Talking to satellite...")
-        status = rb.satellite_transfer()
-        # loop as needed
-        retry = 0
-        while status[0] > 8:
-            time.sleep(10)
-            status = rb.satellite_transfer()
-            print(retry, status)
-            retry += 1
-
+        sbd_transfer(rb)
         print("\nDONE.")
+
+
+@cli.command()
+@click.pass_context
+def receive(ctx):
+    with serial.Serial(ctx.parent.serial_device, baudrate=19200, bytesize=serial.EIGHTBITS,
+                       parity=serial.PARITY_NONE, stopbits=serial.STOPBITS_ONE,
+                       xonxoff=False, timeout=1) as serial_conn:
+
+        rb = RockBlock(serial_conn)
+
+        sbd_transfer(rb)
+        print("\nDONE.")
+
+        # get the text
+        print(rb.text_in)
 
 
 @cli.command()

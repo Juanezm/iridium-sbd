@@ -189,6 +189,7 @@ Options:
 Commands:
   send
   signal
+  receive
 ```
 
 At the moment, two operations are supported only:
@@ -248,7 +249,40 @@ Talking to satellite...
 DONE.
 ```
 
- 
+- Receiving a text message
+
+```bash
+(venv) pi@raspberrypi:~ $ iridium-sbd receive
+Status                  | (0, 69, 0, -1, 0, 0)
+Model                   | IRIDIUM 9600 Family SBD Transceiver
+Call Processor Version  | TA13001        
+Modem DSP Version       | 1.7 svn        
+CpeM DSP Version        | 1.2 svn        
+CpeA DSP Version        | 1.2 svn        
+DBB Version             | 0x0001 (ASIC)  
+RFA Version             | 0x0004 (2A)    
+NVM Version             | KVS            
+Hardware Version        | BOOT07d2/9602revG/04/RAW04
+BOOT Version            | TA13001 (rev 3525)
+Serial Number           | 300234063233380
+Geolocation             | (4056, 224, 4900) 2021-11-26T15:56:21Z
+System time             | 2021-11-29T14:13:35Z
+Talking to satellite...
+0 (32, 69, 2, 0, 0, 0)
+1 (32, 69, 2, 0, 0, 0)
+2 (32, 69, 2, 0, 0, 0)
+3 (32, 69, 2, 0, 0, 0)
+4 (32, 69, 2, 0, 0, 0)
+5 (32, 69, 2, 0, 0, 0)
+6 (32, 69, 2, 0, 0, 0)
+7 (32, 69, 2, 0, 0, 0)
+8 (0, 69, 1, 1, 8, 0)
+
+DONE.
+Hello RB
+
+```
+
 ## References
 
 - https://usermanual.wiki/Iridium-Satellite/9603N.Iridium-9602-9602N-SBD-Transceiver-Developers-Guide-V1-2--DRAFT2/html
